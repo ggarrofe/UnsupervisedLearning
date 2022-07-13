@@ -97,12 +97,11 @@ def kmeans(
 
 def kmeans_predict(
         X,
-        cluster_centers,
-        distance='euclidean',
+        centroids,
         device=torch.device('cpu')
 ):
     X = X.float().to(device)
-    dis = distance(X, cluster_centers)
+    dis = distance(X, centroids)
     return torch.argmin(dis, dim=1).cpu()
 
 

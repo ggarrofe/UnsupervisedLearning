@@ -2,7 +2,7 @@ from utils import utils
 import torch
 import matplotlib.pyplot as plt
 
-def plot_clusters_3Dpoints(points, cluster_ids, num_clusters, colab=False, out_path=None):
+def plot_clusters_3Dpoints(points, cluster_ids, num_clusters, colab=False, out_path=None, filename=None):
     colors = torch.zeros((points.shape[0], 3))
     
     for id in range(num_clusters):
@@ -17,7 +17,8 @@ def plot_clusters_3Dpoints(points, cluster_ids, num_clusters, colab=False, out_p
         ax.axis("off")
         ax.scatter(points[:,0], points[:,1], points[:,2], s=1, c=colors)
         if out_path is not None:
-            plt.savefig(f"{out_path}/surface_clusters_3D.png", dpi=300)
+            filename = "surface_clusters_3D.png" if filename is None else filename
+            plt.savefig(f"{out_path}/{filename}", dpi=300)
         plt.show()
     else:
         import open3d as o3d
@@ -26,7 +27,7 @@ def plot_clusters_3Dpoints(points, cluster_ids, num_clusters, colab=False, out_p
         pcd.point["colors"] = utils.torch2open3d(colors)
         o3d.visualization.draw_geometries([pcd.to_legacy()])
 
-def plot_clusters_2Dpoints(points, cluster_ids, num_clusters, out_path=None):
+def plot_clusters_2Dpoints(points, cluster_ids, num_clusters, out_path=None, filename=None):
     colors = torch.zeros((points.shape[0], 3))
     
     for id in range(num_clusters):
@@ -37,5 +38,6 @@ def plot_clusters_2Dpoints(points, cluster_ids, num_clusters, out_path=None):
         colors = colors.cpu().numpy()
         plt.scatter(points[:,0], points[:,1], s=1, c=colors)
         if out_path is not None:
-            plt.savefig(f"{out_path}/surface_clusters_2D.png", dpi=300)
+            filename = "surface_clusters_2D.png" if filename is None else filename
+            plt.savefig(f"{out_path}/{filename}", dpi=300)
         plt.show()
