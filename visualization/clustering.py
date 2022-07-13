@@ -35,10 +35,7 @@ def plot_clusters_2Dpoints(points, cluster_ids, num_clusters, out_path=None):
     
         points = points.cpu().numpy()
         colors = colors.cpu().numpy()
-        ax = plt.axes(projection='2d')
-        ax.view_init(90, -90)
-        ax.axis("off")
-        ax.scatter(points[:,0], points[:,1], s=1, c=colors)
+        plt.scatter(points[:,0], points[:,1], s=1, c=colors)
         if out_path is not None:
             plt.savefig(f"{out_path}/surface_clusters_2D.png", dpi=300)
         plt.show()
