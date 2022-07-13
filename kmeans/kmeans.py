@@ -67,7 +67,7 @@ def kmeans(
                     n_samples[cluster] += new_samples
                     means[cluster] += (sum - new_samples*means[cluster])/n_samples[cluster]
 
-        # Avoids having only one cluster
+        # Avoids converging to only one cluster
         for cluster in range(num_clusters):
             randint = torch.randint(len(X), (1,))
             if n_samples[cluster] == 0:

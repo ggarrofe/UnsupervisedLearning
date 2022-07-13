@@ -16,9 +16,11 @@ def plot_clusters_3Dpoints(points, cluster_ids, num_clusters, colab=False, out_p
         ax.view_init(90, -90)
         ax.axis("off")
         ax.scatter(points[:,0], points[:,1], points[:,2], s=1, c=colors)
+
         if out_path is not None:
             filename = "surface_clusters_3D.png" if filename is None else filename
             plt.savefig(f"{out_path}/{filename}", dpi=300)
+
         plt.show()
     else:
         import open3d as o3d
@@ -34,10 +36,10 @@ def plot_clusters_2Dpoints(points, cluster_ids, num_clusters, out_path=None, fil
         color = torch.rand((3,))
         colors[cluster_ids == id] = color
     
-        points = points.cpu().numpy()
-        colors = colors.cpu().numpy()
-        plt.scatter(points[:,0], points[:,1], s=1, c=colors)
-        if out_path is not None:
-            filename = "surface_clusters_2D.png" if filename is None else filename
-            plt.savefig(f"{out_path}/{filename}", dpi=300)
-        plt.show()
+    points = points.cpu().numpy()
+    colors = colors.cpu().numpy()
+    plt.scatter(points[:,0], points[:,1], s=1, c=colors)
+    if out_path is not None:
+        filename = "surface_clusters_2D.png" if filename is None else filename
+        plt.savefig(f"{out_path}/{filename}", dpi=300)
+    plt.show()
